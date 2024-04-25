@@ -1,0 +1,21 @@
+{
+    "name": "serialport-gsm-ts-lib",
+    "version": "1.0.1",
+    "description": "Typescriped serialgsm",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Kaspisijus/serialport-gsm-ts-lib.git"
+    },
+    "keywords": [
+      "serial-gsm",
+      "typescript"
+    ],
+    "author": "KillerJulian",
+    "license": "free",
+    "dependencies": {
+    }
+  }

@@ -14,12 +14,11 @@
       "serial-gsm",
       "typescript"
     ],
-    
     "author": "KillerJulian",
     "license": "free",
     "dependencies": {
       "node-pdu": "^2.0.2",
       "serialport": "^12.0.0",
       "tslib": "^2.6.2"
-    },
+    }
   }

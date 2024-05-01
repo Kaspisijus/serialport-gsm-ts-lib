@@ -475,7 +475,7 @@ class Modem {
     async hangupCall(prio = false) {
         const response = await (0, utils_1.simplifyResponse)(this.executeATCommand('ATH', prio));
         if ((0, utils_1.resultCode)(response) !== 'OK') {
-            throw new utils_1.ModemError(this, 'The hang up of the call failed!');
+            throw new utils_1.ModemError(this, `The hang up of the call failed with response: [${response}]`);
         }
     }
     /**

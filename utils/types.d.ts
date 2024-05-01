@@ -6,6 +6,7 @@ export type ModemOptions = {
     customInitCommand: string | null;
     autoInitOnOpen: boolean;
     cnmiCommand: string;
+    logger?: Console;
 };
 export { EventTypes } from './Events';
 export type CommandResponse = string[];

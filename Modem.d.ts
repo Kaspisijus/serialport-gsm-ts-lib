@@ -7,6 +7,7 @@ export declare class Modem {
     private readonly communicator;
     private readonly events;
     private readonly cmdHandler;
+    logger: Console | undefined;
     constructor(communicator: Communicator, options?: Partial<ModemOptions>);
     /**
      * A getter method to retrieve a unique identifier for the modem device.

@@ -15,8 +15,10 @@ class Modem {
             enableConcatenation: options.enableConcatenation ?? true,
             customInitCommand: options.customInitCommand ?? null,
             autoInitOnOpen: options.autoInitOnOpen ?? true,
-            cnmiCommand: options.cnmiCommand ?? 'AT+CNMI=2,1,0,2,1'
+            cnmiCommand: options.cnmiCommand ?? 'AT+CNMI=2,1,0,2,1',
+            logger: options.logger
         };
+        this.logger = options.logger;
         this.communicator = communicator;
         this.cmdHandler = new CommandHandler_1.CommandHandler(this, this.communicator, this.events);
         this.on('onNewSms', (id) => this.options.deleteSmsOnReceive && this.deleteSms(id).catch());

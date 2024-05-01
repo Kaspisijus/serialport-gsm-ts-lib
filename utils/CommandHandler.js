@@ -44,7 +44,14 @@ class CommandHandler {
         }
         this.isLocked = true;
         if (item instanceof Command_1.Command) {
-            await this.executeCMD(item);
+            this.modem.logger?.log(`---------\nexecuteCMD: ${item.ATCommand}, timeout: ${item.timeout}`);
+            await this.executeCMD(item)
+                .then((res) => {
+                this.modem.logger?.log(`finished: ${res}`);
+            })
+                .catch((err) => {
+                this.modem.logger?.log(`error: ${err}`);
+            });
         }
         else {
             for (const cmd of item.cmds) {
@@ -118,6 +125,7 @@ class CommandHandler {
      * @param received The received data from the modem.
      */
     dataReceived(received) {
+        this.modem.logger?.log(`dataReceived: ${received}`);
         this.receivedData += received;
         const parts = this.receivedData.split('\r\n');
         this.receivedData = parts.pop() || '';

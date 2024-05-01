@@ -44,18 +44,27 @@ class CommandHandler {
         }
         this.isLocked = true;
         if (item instanceof Command_1.Command) {
-            this.modem.logger?.log(`---------\nexecuteCMD: ${item.ATCommand}, timeout: ${item.timeout}`);
+            this.modem.logger?.log("---------\nexecuteCMD: ", item.ATCommand);
             await this.executeCMD(item)
                 .then((res) => {
-                this.modem.logger?.log(`finished: ${res}`);
-            })
-                .catch((err) => {
-                this.modem.logger?.log(`error: ${err}`);
+                this.modem.logger?.log("res: ", res);
+                return res;
+            }).catch((err) => {
+                this.modem.logger?.log("err: ", err);
+                return err;
             });
         }
         else {
             for (const cmd of item.cmds) {
-                const result = await this.executeCMD(cmd);
+                this.modem.logger?.log("---------\nexecuteCMDs: ", cmd.ATCommand);
+                const result = await this.executeCMD(cmd)
+                    .then((res) => {
+                    this.modem.logger?.log("res: ", res);
+                    return res;
+                }).catch((err) => {
+                    this.modem.logger?.log("err: ", err);
+                    return err;
+                });
                 if (result instanceof Error && item.cancelOnFailure) {
                     if (item.onFailed) {
                         item.onFailed(result);
@@ -125,7 +134,6 @@ class CommandHandler {
      * @param received The received data from the modem.
      */
     dataReceived(received) {
-        this.modem.logger?.log(`dataReceived: ${received}`);
         this.receivedData += received;
         const parts = this.receivedData.split('\r\n');
         this.receivedData = parts.pop() || '';

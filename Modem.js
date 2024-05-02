@@ -8,7 +8,6 @@ const Events_1 = require("./utils/Events");
 const utils_1 = require("./utils/utils");
 class Modem {
     constructor(communicator, options = {}) {
-        this.events = new Events_1.Events();
         this.options = {
             pinCode: options.pinCode ?? null,
             deleteSmsOnReceive: options.deleteSmsOnReceive ?? false,
@@ -19,6 +18,7 @@ class Modem {
             logger: options.logger
         };
         this.logger = options.logger;
+        this.events = new Events_1.Events(this.logger);
         this.communicator = communicator;
         this.cmdHandler = new CommandHandler_1.CommandHandler(this, this.communicator, this.events);
         this.on('onNewSms', (id) => this.options.deleteSmsOnReceive && this.deleteSms(id).catch());

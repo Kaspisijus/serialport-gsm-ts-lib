@@ -2,10 +2,12 @@
 import { EventEmitter } from 'events';
 import { CommandResponse, OnIncomingCall, OnIncomingUSSD, SendSmsFailed, SendSmsSuccess, SimMemoryInformation } from './types';
 export declare class Events extends EventEmitter {
-    constructor();
+    logger?: Console | undefined;
+    constructor(logger?: Console | undefined);
     emit<T extends keyof EventTypes>(event: T, ...parameters: Parameters<EventTypes[T]>): boolean;
     on<T extends keyof EventTypes>(event: T, listener: EventTypes[T]): this;
     once<T extends keyof EventTypes>(event: T, listener: EventTypes[T]): this;
+    removeListener(eventName: string | symbol, listener: (...args: any[]) => void): this;
 }
 export type EventTypes = {
     /**
